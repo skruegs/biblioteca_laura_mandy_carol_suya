@@ -17,11 +17,7 @@ public class Biblioteca {
 
     public void listBooks() {
 
-        //   for (Book book: bookList) book.display();
-        if (bookList.size() == 1) bookList.get(0).display();
-        else if (bookList.size() == 2) {
-            bookList.get(0).display();
-            bookList.get(1).display();
-        }
+        for (Book book: bookList) book.display();
+
     }
 }
