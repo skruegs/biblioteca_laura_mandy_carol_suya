@@ -10,4 +10,9 @@ public class Biblioteca {
     public void start() {
         printStream.println("Welcome");
     }
+
+    public void listBooks() {
+        printStream.println("Harry Potter");
+
+    }
 }
