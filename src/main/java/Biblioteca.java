@@ -1,10 +1,13 @@
 import java.io.PrintStream;
+import java.util.List;
 
 public class Biblioteca {
     PrintStream printStream;
+    List<String> bookList;
 
-    public Biblioteca (PrintStream printStream) {
+    public Biblioteca (PrintStream printStream, List<String> bookList) {
         this.printStream = printStream;
+        this.bookList = bookList;
     }
 
     public void start() {
@@ -12,7 +15,9 @@ public class Biblioteca {
     }
 
     public void listBooks() {
-        printStream.println("Harry Potter");
+
+        for (String title: bookList)
+            printStream.println(title);
 
     }
 }
