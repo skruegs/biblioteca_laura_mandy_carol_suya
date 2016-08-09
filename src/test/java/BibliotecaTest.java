@@ -7,48 +7,47 @@ import java.util.List;
 
 import static org.mockito.Matchers.contains;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 public class BibliotecaTest {
 
     private PrintStream printStream;
     private Biblioteca biblioteca;
-    private List<String> bookList;
+    private List<Book> bookList;
 
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        bookList = new ArrayList<String>();
-        bookList.add("Harry Potter");
-        bookList.add("The Grimm");
-        biblioteca = new Biblioteca(printStream, bookList);
+        bookList = new ArrayList<Book>();
     }
 
     @Test
     public void shouldPrintWelcomeWhenStart() {
+        biblioteca = new Biblioteca(printStream, bookList);
         biblioteca.start();
         verify(printStream).println("Welcome");
     }
 
     @Test
-    public void shouldPrintHarryPotterWhenListBooksIsCalled(){
+    public void shouldCallPrintOnceWithBookListSizeOne(){
+        Book book1 = mock(Book.class);
+        bookList.add(book1);
+        biblioteca = new Biblioteca(printStream, bookList);
         biblioteca.listBooks();
-        verify(printStream).println(contains("Harry Potter"));
+        verify(book1,times(1)).display();
     }
 
     @Test
-    public void shouldPrintTheGrimmWHenListBooksIsCalled(){
+    public void shouldCallPrintTwiceWithBookListSizeTwo(){
+        Book book1 = mock(Book.class);
+        bookList.add(book1);
+        bookList.add(book1);
+        biblioteca = new Biblioteca(printStream, bookList);
         biblioteca.listBooks();
-        verify(printStream).println(contains("The Grimm"));
+        verify(book1,times(2)).display();
     }
 
-    @Test
-    public void shouldPrintHarryPotterAndGrimmWhenStartIsCalled() {
-        biblioteca.start();
-        verify(printStream).println(contains("Harry Potter"));
-        verify(printStream).println(contains("The Grimm"));
-
-    }
 
 }
