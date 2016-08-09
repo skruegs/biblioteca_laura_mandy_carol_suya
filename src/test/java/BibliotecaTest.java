@@ -43,4 +43,12 @@ public class BibliotecaTest {
         verify(printStream).println(contains("The Grimm"));
     }
 
+    @Test
+    public void shouldPrintHarryPotterAndGrimmWhenStartIsCalled() {
+        biblioteca.start();
+        verify(printStream).println(contains("Harry Potter"));
+        verify(printStream).println(contains("The Grimm"));
+
+    }
+
 }

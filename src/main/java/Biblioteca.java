@@ -12,6 +12,7 @@ public class Biblioteca {
 
     public void start() {
         printStream.println("Welcome");
+        listBooks();
     }
 
     public void listBooks() {
