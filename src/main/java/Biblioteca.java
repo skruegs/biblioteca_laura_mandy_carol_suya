@@ -2,17 +2,13 @@ import java.io.PrintStream;
 import java.util.List;
 
 public class Biblioteca {
-    PrintStream printStream;
-    List<Book> bookList;
+
+    private PrintStream printStream;
+    private List<Book> bookList;
 
     public Biblioteca (PrintStream printStream, List<Book> bookList) {
         this.printStream = printStream;
         this.bookList = bookList;
-    }
-
-    public void start() {
-        printStream.println("Welcome to Biblioteca!");
-//        listBooks();
     }
 
     public void listBooks() {

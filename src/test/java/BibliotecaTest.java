@@ -21,13 +21,6 @@ public class BibliotecaTest {
     }
 
     @Test
-    public void shouldPrintWelcomeWhenStart() {
-        biblioteca = new Biblioteca(printStream, bookList);
-        biblioteca.start();
-        verify(printStream).println("Welcome to Biblioteca!");
-    }
-
-    @Test
     public void shouldCallPrintOnceWithBookListSizeOne(){
         Book book1 = mock(Book.class);
         bookList.add(book1);

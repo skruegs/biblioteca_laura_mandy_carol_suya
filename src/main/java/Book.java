@@ -16,10 +16,9 @@ public class Book {
 
     public String formatDisplayString() {
         String formatString = String.format("%-50s%-20s%-20s",title,author,year);
-        //= title + "\t" + author + "\t" + year;
-
         return formatString;
     }
+
     public void display() {
         String bookString = formatDisplayString();
         printStream.println(bookString);
