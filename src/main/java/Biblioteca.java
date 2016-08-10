@@ -11,7 +11,7 @@ public class Biblioteca {
     }
 
     public void start() {
-        printStream.println("Welcome");
+        printStream.println("Welcome to Biblioteca!");
         listBooks();
     }
 

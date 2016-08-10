@@ -5,10 +5,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.contains;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class BibliotecaTest {
 
@@ -27,7 +24,7 @@ public class BibliotecaTest {
     public void shouldPrintWelcomeWhenStart() {
         biblioteca = new Biblioteca(printStream, bookList);
         biblioteca.start();
-        verify(printStream).println("Welcome");
+        verify(printStream).println("Welcome to Biblioteca!");
     }
 
     @Test
