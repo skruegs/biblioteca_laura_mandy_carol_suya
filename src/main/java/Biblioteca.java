@@ -12,11 +12,10 @@ public class Biblioteca {
 
     public void start() {
         printStream.println("Welcome to Biblioteca!");
-        listBooks();
+//        listBooks();
     }
 
     public void listBooks() {
-
         for (Book book: bookList) book.display();
 
     }
