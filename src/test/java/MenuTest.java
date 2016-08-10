@@ -4,6 +4,8 @@ import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -15,13 +17,18 @@ public class MenuTest {
     Menu menu;
     BufferedReader reader;
     Biblioteca biblioteca;
+    Map<String,Command> commandMap;
+    Command listBooksCommand;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
         biblioteca = mock(Biblioteca.class);
-        menu = new Menu(printStream, reader, biblioteca);
+        commandMap = new HashMap<String, Command>();
+        listBooksCommand = mock(ListBooksCommand.class);
+        commandMap.put("1", listBooksCommand);
+        menu = new Menu(printStream, reader, biblioteca, commandMap);
     }
 
     @Test
@@ -42,14 +49,14 @@ public class MenuTest {
     public void shouldPrintListOfBooksWhenOptionOneChosen() throws IOException {
         when(reader.readLine()).thenReturn("1");
         menu.processesUserOption();
-        verify(biblioteca).listBooks();
+        verify(listBooksCommand).run();
     }
 
     @Test
     public void shouldGiveErrorMessageWhenInvalidOptionEntered() throws Exception{
-        when(reader.readLine()).thenReturn("2");
+        when(reader.readLine()).thenReturn("8");
         menu.processesUserOption();
-        verify(printStream).println("Invalid option!");
+        verify(printStream).println("Select a valid option!");
     }
 
 }
