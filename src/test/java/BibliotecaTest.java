@@ -52,4 +52,12 @@ public class BibliotecaTest {
         biblioteca.checkOutBook(title);
         verify(printStream).println("Thank you! Enjoy the book!");
     }
+
+    @Test
+    public void shouldPrintFailedCheckOutMessageWhenBookIsNotAvail() throws Exception {
+        when(book1.isThisMyTitle(title)).thenReturn(false);
+        biblioteca.checkOutBook(title);
+        verify(printStream).println("That book is not available.");
+    }
+
 }

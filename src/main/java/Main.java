@@ -31,8 +31,10 @@ public class Main {
         Command quitCommand = new QuitCommand();
         Command listBooksCommand = new ListBooksCommand(biblioteca);
         Command checkOutCommand = new CheckOutCommand(biblioteca, reader, printStream);
+        Command checkInCommand = new CheckInCommand(biblioteca, reader, printStream);
         commandMap.put("0", quitCommand);
         commandMap.put("1", listBooksCommand);
         commandMap.put("2", checkOutCommand);
+        commandMap.put("3", checkInCommand);
     }
 }

@@ -21,6 +21,7 @@ public class MenuTest {
     Command listBooksCommand;
     Command quitCommand;
     Command checkOutCommand;
+    private Command checkInCommand;
 
     @Before
     public void setUp() {
@@ -31,9 +32,11 @@ public class MenuTest {
         listBooksCommand = mock(ListBooksCommand.class);
         quitCommand = mock(QuitCommand.class);
         checkOutCommand = mock(CheckOutCommand.class);
+        checkInCommand = mock(CheckInCommand.class);
         commandMap.put("0", quitCommand);
         commandMap.put("1", listBooksCommand);
         commandMap.put("2", checkOutCommand);
+        commandMap.put("3", checkInCommand);
         menu = new Menu(printStream, reader, commandMap);
     }
 
@@ -84,5 +87,12 @@ public class MenuTest {
         when(reader.readLine()).thenReturn("2", "0");
         menu.processUserOption();
         verify(checkOutCommand).run();
+    }
+
+    @Test
+    public void shouldCallCheckInBookWhenOptionThreeIsChosen() throws Exception {
+        when(reader.readLine()).thenReturn("3", "0");
+        menu.processUserOption();
+        verify(checkInCommand).run();
     }
 }

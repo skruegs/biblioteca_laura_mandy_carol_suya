@@ -18,12 +18,20 @@ public class Biblioteca {
     }
 
     public void checkOutBook(String title) {
+        boolean bookCheckedOut = false;
         for (Book book : bookList) {
             if (book.isThisMyTitle(title)) {
                 bookList.remove(book);
                 printStream.println("Thank you! Enjoy the book!");
+                bookCheckedOut = true;
                 break;
             }
         }
+        if (!bookCheckedOut) {
+            printStream.println("That book is not available.");
+        }
+    }
+
+    public void checkInBook(String title) {
     }
 }
