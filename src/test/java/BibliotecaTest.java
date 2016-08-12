@@ -17,14 +17,14 @@ public class BibliotecaTest {
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        bookList = new ArrayList<Book>();
+        bookList = new ArrayList<>();
     }
 
     @Test
     public void shouldCallPrintOnceWithBookListSizeOne(){
         Book book1 = mock(Book.class);
         bookList.add(book1);
-        biblioteca = new Biblioteca(printStream, bookList);
+        biblioteca = new Biblioteca(bookList);
         biblioteca.listBooks();
         verify(book1,times(1)).display();
     }
@@ -34,9 +34,9 @@ public class BibliotecaTest {
         Book book1 = mock(Book.class);
         bookList.add(book1);
         bookList.add(book1);
-        biblioteca = new Biblioteca(printStream, bookList);
+        biblioteca = new Biblioteca(bookList);
         biblioteca.listBooks();
-        verify(book1,times(2)).display();
+        verify(book1, times(2)).display();
     }
 
 

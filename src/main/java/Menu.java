@@ -7,14 +7,12 @@ public class Menu {
 
     private PrintStream printStream;
     private BufferedReader reader;
-    private Biblioteca biblioteca;
     private Map<String, Command> commandMap;
     private String userChoice;
 
-    public Menu(PrintStream printStream, BufferedReader reader, Biblioteca biblioteca, Map<String, Command> commandMap) {
+    public Menu(PrintStream printStream, BufferedReader reader, Map<String, Command> commandMap) {
         this.printStream = printStream;
         this.reader = reader;
-        this.biblioteca = biblioteca;
         this.commandMap = commandMap;
         userChoice = "";
     }
@@ -23,26 +21,27 @@ public class Menu {
         printStream.println("Welcome to Biblioteca!");
         printOptionsList();
 
-        while(!userChoice.equals("0"))
-            processesUserOption();
+        while(!userChoice.equals("0")) {
+           processUserOption();
+        }
     }
 
     public void printOptionsList() {
         printStream.println("Please enter the # of the option you would like to select:");
-        String optionName = "";
-        for(String key: commandMap.keySet()) {
+        String optionName;
+        for(String key : commandMap.keySet()) {
             optionName = key + ") " + commandMap.get(key).returnOptionName();
             printStream.println(optionName);
         }
     }
 
-    public void processesUserOption() throws IOException {
+    public void processUserOption() throws IOException {
         userChoice = reader.readLine();
 
         while(!commandMap.containsKey(userChoice)) {
             printStream.println("Select a valid option!");
             userChoice = reader.readLine();
         }
-            commandMap.get(userChoice).run();
+        commandMap.get(userChoice).run();
     }
 }

@@ -1,5 +1,4 @@
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -21,23 +20,26 @@ public class MenuTest {
     Map<String,Command> commandMap;
     Command listBooksCommand;
     Command quitCommand;
+    Command checkOutCommand;
 
     @Before
     public void setUp() {
         printStream = mock(PrintStream.class);
         reader = mock(BufferedReader.class);
         biblioteca = mock(Biblioteca.class);
-        commandMap = new HashMap<String, Command>();
+        commandMap = new HashMap<>();
         listBooksCommand = mock(ListBooksCommand.class);
         quitCommand = mock(QuitCommand.class);
+        checkOutCommand = mock(CheckOutCommand.class);
         commandMap.put("0", quitCommand);
         commandMap.put("1", listBooksCommand);
-        menu = new Menu(printStream, reader, biblioteca, commandMap);
+        commandMap.put("2", checkOutCommand);
+        menu = new Menu(printStream, reader, commandMap);
     }
 
     @Test
     public void shouldPrintWelcomeWhenStart() throws IOException {
-        when(reader.readLine()).thenReturn("1");
+        when(reader.readLine()).thenReturn("1", "0");
         menu.start();
         verify(printStream).println("Welcome to Biblioteca!");
     }
@@ -50,30 +52,37 @@ public class MenuTest {
     }
 
     @Test
-    public void shouldPrintListOfBooksWhenOptionOneChosen() throws IOException {
+    public void shouldCallListBooksWhenOptionOneChosen() throws IOException {
         when(reader.readLine()).thenReturn("1");
-        menu.processesUserOption();
+        menu.processUserOption();
         verify(listBooksCommand).run();
     }
 
     @Test
     public void shouldGiveErrorMessageWhenInvalidOptionEntered() throws Exception{
         when(reader.readLine()).thenReturn("&", "1");
-        menu.processesUserOption();
+        menu.processUserOption();
         verify(printStream).println("Select a valid option!");
     }
 
     @Test
-    public void shouldQuitWhenOptionZeroChosen() throws IOException {
+    public void shouldCallQuitWhenOptionZeroChosen() throws IOException {
         when(reader.readLine()).thenReturn("0");
-        menu.processesUserOption();
+        menu.processUserOption();
         verify(quitCommand).run();
     }
 
     @Test
     public void shouldKeepAskingWhenGivenInvalidInputUntilGivenValidInput() throws Exception {
         when(reader.readLine()).thenReturn("$", "what", "1");
-        menu.processesUserOption();
+        menu.processUserOption();
         verify(listBooksCommand).run();
+    }
+
+    @Test
+    public void shouldCallCheckOutBookWhenOptionTwoIsChosen() throws Exception {
+        when(reader.readLine()).thenReturn("2", "0");
+        menu.processUserOption();
+        verify(checkOutCommand).run();
     }
 }

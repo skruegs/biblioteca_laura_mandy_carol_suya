@@ -1,5 +1,3 @@
-import java.io.PrintStream;
-
 public class ListBooksCommand implements Command {
 
     Biblioteca biblioteca;
