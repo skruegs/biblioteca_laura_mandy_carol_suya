@@ -12,17 +12,19 @@ public class BibliotecaTest {
 
     private PrintStream printStream;
     private Biblioteca biblioteca;
-    private List<Book> bookList;
+    private List<Book> checkedInList;
     private final Book book1 = mock(Book.class);
     private String title;
+    private List<Book> checkedOutList;
 
 
     @Before
     public void setUp() throws Exception {
         printStream = mock(PrintStream.class);
-        bookList = new ArrayList<>();
-        bookList.add(book1);
-        biblioteca = new Biblioteca(bookList, printStream);
+        checkedInList = new ArrayList<>();
+        checkedInList.add(book1);
+        checkedOutList = new ArrayList<>();
+        biblioteca = new Biblioteca(checkedInList, checkedOutList, printStream);
         title = "<any title>";
     }
 
@@ -34,7 +36,7 @@ public class BibliotecaTest {
 
     @Test
     public void shouldCallPrintTwiceWithBookListSizeTwo(){
-        bookList.add(book1);
+        checkedInList.add(book1);
         biblioteca.listBooks();
         verify(book1, times(2)).display();
     }
@@ -43,7 +45,7 @@ public class BibliotecaTest {
     public void bookListShouldBeEmptyWhenOneBookIsInListAndThenGetsCheckedOut() {
         when(book1.isThisMyTitle(title)).thenReturn(true);
         biblioteca.checkOutBook(title);
-        assertTrue(bookList.isEmpty());
+        assertTrue(checkedInList.isEmpty());
     }
 
     @Test
@@ -59,5 +61,32 @@ public class BibliotecaTest {
         biblioteca.checkOutBook(title);
         verify(printStream).println("That book is not available.");
     }
+
+
+    @Test
+    public void shouldCallPrintTwiceWithOneCheckedInBookAndOneCheckedOutBookThatGetsReturned(){
+        checkedOutList.add(book1);
+        when(book1.isThisMyTitle(title)).thenReturn(true);
+        biblioteca.checkInBook(title);
+        biblioteca.listBooks();
+        verify(book1,times(2)).display();
+    }
+
+    @Test
+    public void shouldPrintSuccessfulCheckedInMessageWhenBookIsCheckedIn() {
+        when(book1.isThisMyTitle(title)).thenReturn(true);
+        checkedOutList.add(book1);
+        biblioteca.checkInBook(title);
+        verify(printStream).println("Thank you for returning the book.");
+    }
+
+    @Test
+    public void shouldPrintFailedCheckInMessageWhenBookIsNotAvail() throws Exception {
+        when(book1.isThisMyTitle(title)).thenReturn(false);
+        biblioteca.checkInBook(title);
+        verify(printStream).println("That is not a valid book to return.");
+    }
+
+
 
 }

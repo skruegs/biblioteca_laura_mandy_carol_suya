@@ -26,7 +26,14 @@ public class CheckInCommandTest {
 
     @Test
     public void shouldCallCheckInBookWhenRun() throws Exception {
+        when(reader.readLine()).thenReturn(title);
         checkInCommand.run();
-        verify(biblioteca).checkInBook("Title");
+        verify(biblioteca).checkInBook(title);
+    }
+
+    @Test
+    public void shouldAcceptInputFromUserWhenRunIsCalled() throws Exception {
+        checkInCommand.run();
+        verify(reader).readLine();
     }
 }

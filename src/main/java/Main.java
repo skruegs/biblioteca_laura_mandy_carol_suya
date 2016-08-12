@@ -10,7 +10,7 @@ public class Main {
         List<Book> bookList = createListOfBooks(printStream);
 
         Map<String,Command> commandMap = new LinkedHashMap<>();
-        Biblioteca biblioteca = new Biblioteca(bookList, printStream);
+        Biblioteca biblioteca = new Biblioteca(bookList, new ArrayList<Book>(), printStream);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         generateMenuOptions(biblioteca, commandMap, reader, printStream);

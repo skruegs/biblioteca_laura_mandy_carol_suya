@@ -22,7 +22,8 @@ public class Menu {
         printOptionsList();
 
         while(!userChoice.equals("0")) {
-           processUserOption();
+            processUserOption();
+            printOptionsList();
         }
     }
 

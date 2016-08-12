@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 
 public class CheckInCommand implements Command {
@@ -15,7 +16,13 @@ public class CheckInCommand implements Command {
 
     @Override
     public void run() {
-        biblioteca.checkInBook("Title");
+        printStream.println("Enter title to check in:");
+        try {
+            String input = reader.readLine();
+            biblioteca.checkInBook(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
