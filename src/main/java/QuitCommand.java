@@ -1,5 +1,3 @@
-import java.io.PrintStream;
-
 public class QuitCommand implements Command {
     @Override
     public void run() {

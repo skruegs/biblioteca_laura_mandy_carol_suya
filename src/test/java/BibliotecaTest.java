@@ -14,6 +14,7 @@ public class BibliotecaTest {
     private Biblioteca biblioteca;
     private List<Book> bookList;
     private final Book book1 = mock(Book.class);
+    private String title;
 
 
     @Before
@@ -21,7 +22,8 @@ public class BibliotecaTest {
         printStream = mock(PrintStream.class);
         bookList = new ArrayList<>();
         bookList.add(book1);
-        biblioteca = new Biblioteca(bookList);
+        biblioteca = new Biblioteca(bookList, printStream);
+        title = "<any title>";
     }
 
     @Test
@@ -39,9 +41,15 @@ public class BibliotecaTest {
 
     @Test
     public void bookListShouldBeEmptyWhenOneBookIsInListAndThenGetsCheckedOut() {
-        String title = "<any title>";
         when(book1.isThisMyTitle(title)).thenReturn(true);
         biblioteca.checkOutBook(title);
         assertTrue(bookList.isEmpty());
+    }
+
+    @Test
+    public void shouldPrintSuccessfulCheckedOutMessageWhenBookIsCheckedOut() {
+        when(book1.isThisMyTitle(title)).thenReturn(true);
+        biblioteca.checkOutBook(title);
+        verify(printStream).println("Thank you! Enjoy the book!");
     }
 }

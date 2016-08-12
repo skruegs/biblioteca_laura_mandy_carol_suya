@@ -25,6 +25,6 @@ public class Book {
     }
 
     public boolean isThisMyTitle(String title) {
-        return false;
+        return title.equals(this.title);
     }
 }
