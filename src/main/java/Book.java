@@ -23,4 +23,8 @@ public class Book {
         String bookString = formatDisplayString();
         printStream.println(bookString);
     }
+
+    public boolean isThisMyTitle(String title) {
+        return false;
+    }
 }

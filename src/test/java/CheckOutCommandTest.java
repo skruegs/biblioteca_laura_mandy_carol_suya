@@ -10,7 +10,7 @@ public class CheckOutCommandTest {
         CheckOutCommand checkOutCommand = new CheckOutCommand(biblioteca);
 
         checkOutCommand.run();
-        
-        verify(biblioteca).checkOutBook();
+
+        verify(biblioteca).checkOutBook("<any title>");
     }
 }

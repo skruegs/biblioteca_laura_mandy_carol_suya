@@ -14,6 +14,12 @@ public class Biblioteca {
         }
     }
 
-    public void checkOutBook() {
+    public void checkOutBook(String title) {
+        for (Book book : bookList) {
+            if (book.isThisMyTitle(title)) {
+                bookList.remove(book);
+                break;
+            }
+        }
     }
 }

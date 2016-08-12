@@ -8,7 +8,7 @@ public class CheckOutCommand implements Command {
 
     @Override
     public void run() {
-        biblioteca.checkOutBook();
+        biblioteca.checkOutBook("<any title>");
     }
 
     @Override
