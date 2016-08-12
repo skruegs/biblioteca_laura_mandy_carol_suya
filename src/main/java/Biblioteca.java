@@ -13,4 +13,7 @@ public class Biblioteca {
             book.display();
         }
     }
+
+    public void checkOutBook() {
+    }
 }
